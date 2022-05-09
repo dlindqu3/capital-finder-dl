@@ -20,8 +20,15 @@ class handler(BaseHTTPRequestHandler):
             message = f"The capital of {country} is {capital}"
 
         elif "capital" in d:
-            pass 
+            base_url = "https://restcountries.com/v3.1/capital/" 
+            r = requests.get(base_url + d["capital"])
+            data = r.json()
+
+            country = str(data[0]["name"]["common"])
+            capital = str(data[0]['capital'][0])
+            message = f"{capital} is the capital of {country}"
             
+
         else: 
           message = "Give me a country please"
 
